@@ -1,7 +1,7 @@
 const prideti = document.getElementById('button');
-const redaguoti = document.getElementById('redaguoti');
+
 let inputoModalas = document.getElementById('inputoModalas');
-let inputotekstas = document.querySelector('input');
+let inputotekstas = document.querySelector('#inputas');
 var uzduotis = document.getElementById('pridejimasId');
 let body = document.querySelector('body');
 const duomenys = [];
@@ -9,7 +9,7 @@ let tasks = document.querySelectorAll('.task');
 let innerbox = Array.from(document.querySelectorAll('.inner_box'));
 tasks = Array.from(tasks);
 // Drag start
-var redaguotiDuomenis = false;
+
 var editIndex;
 
 document.querySelector('.container').addEventListener('dragstart', function (e) {
@@ -68,7 +68,7 @@ prideti.addEventListener('click', function () {
     newTask.classList.add('task');
     // padarom kad pasiimtu value is inputo
 
-    var antras = document.createElement('div');
+    antras = document.createElement('div');
     antras.classList.add('ttt');
     newTask.appendChild(antras);
     antras.innerHTML = document.getElementById('pridejimasId').value;
@@ -79,8 +79,8 @@ prideti.addEventListener('click', function () {
     newTask.setAttribute('draggable', true);
     newTask.setAttribute('data-element', Math.random() * 100);
     // susikuriam mygtukus
-    // var antras = document.createElement('div');
-    // newTask.appendChild(antras);
+    var antras = document.createElement('div');
+    newTask.appendChild(antras);
     var redaguotiButton = document.createElement('button');
     redaguotiButton.classList.add('redaguoti');
     redaguotiButton.innerHTML = 'redaguoti';
@@ -97,27 +97,26 @@ prideti.addEventListener('click', function () {
 body.addEventListener('click', function (e) {
     if (e.target && e.target.classList.contains('redaguoti')) {
         inputoModalas.classList.add('modal_overlay--active');
-        editIndex = e.target.parentElement.parentElement;
-        console.log(e.target.parentElement.querySelector('.ttt').innerHTML)
+        
 
 
-        // sudedam duomenis is masyvo i modalo inputus
-        tasks.value = tasks[atributas];
-        console.log('veikia nb');
     }
+        // console.log(e.target.parentElement.querySelector('.ttt').innerHTML)
+        // sudedam duomenis is masyvo i modalo inputus
+        // inputotekstas = tasks[atributas];
+        // console.log('veikia nb');
+    
     if (e.target && e.target.classList.contains('trinti')) {
         e.target.parentElement.remove();
     }
 });
 
-    // redaguotiButton.addEventListener('click', function(e){
-    //     if (e.target && e.target.classList.contains('redaguoti')) {
-    //         inputoModalas.classList.add('modal_overlay--active');
-    //         console.log(e.target.parentElement.querySelector('.ttt').innerHTML)
-    // };
 
+   function funkcija (e){
 
-    // trintiButton.addEventListener('click', function(e){
-    //     newTask.remove();
-    // })
-    
+    // editIndex = e.target.parentElement.querySelector('.ttt').innerHTML;
+    // editIndex = e.target.elementoAttr.innerHTML;
+    editIndex = e.target.parentElement.parentElement;
+    console.log(editIndex);  
+    inputoModalas.classList.remove('modal_overlay--active');
+   }
