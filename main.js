@@ -3,7 +3,7 @@ const redaguoti = document.getElementById('redaguoti');
 let inputoModalas = document.getElementById('inputoModalas');
 let inputotekstas = document.querySelector('input');
 var uzduotis = document.getElementById('pridejimasId');
-let tbody = document.querySelector('tbody');
+let body = document.querySelector('body');
 const duomenys = [];
 let tasks = document.querySelectorAll('.task');
 let innerbox = Array.from(document.querySelectorAll('.inner_box'));
@@ -19,9 +19,6 @@ document.querySelector('.container').addEventListener('dragstart', function (e) 
         e.dataTransfer.setData("text", atributas);
     }
 })
-
-
-
 
 // tasks.forEach((item, index) => {
 //         item.addEventListener('dragstart', function(e) {
@@ -50,8 +47,6 @@ innerbox.forEach((item, index) => {
         e.preventDefault();
     });
 })
-
-
 // Modal kurimo pradzia
 
 // tasks.addEventListener('click', function () {
@@ -66,11 +61,6 @@ innerbox.forEach((item, index) => {
 //     inputoModalas.reset();
 //     inputoModalas.classList.remove('modal_overlay--active');
 // });
-
-
-
-
-
 prideti.addEventListener('click', function () {
     // susikuriam nauja diva
     var newTask = document.createElement('div');
@@ -79,8 +69,11 @@ prideti.addEventListener('click', function () {
     // padarom kad pasiimtu value is inputo
 
     var antras = document.createElement('div');
+    antras.classList.add('ttt');
     newTask.appendChild(antras);
     antras.innerHTML = document.getElementById('pridejimasId').value;
+    tasks.push(antras.innerHTML);
+    console.log(tasks)
 
     // pasidarom kad galetume dropinti
     newTask.setAttribute('draggable', true);
@@ -91,32 +84,40 @@ prideti.addEventListener('click', function () {
     var redaguotiButton = document.createElement('button');
     redaguotiButton.classList.add('redaguoti');
     redaguotiButton.innerHTML = 'redaguoti';
-    redaguotiButton.addEventListener('click', function(e){
-        if (e.target && e.target.classList.contains('redaguoti')) {
-            inputoModalas.classList.add('modal_overlay--active');
-            console.log(e.target.parentElement)
-    };
-});
+
     var trintiButton = document.createElement('button');
     trintiButton.classList.add('trinti');
     trintiButton.innerHTML = 'trinti';
-    trintiButton.addEventListener('click', function(e){
-        newTask.remove();
-        
-    });
+
     newTask.appendChild(trintiButton);
     newTask.appendChild(redaguotiButton);
-    document.getElementById('slot_todo').prepend(newTask)
-    
+    document.getElementById('slot_todo').prepend(newTask);
 });
-// tbody.addEventListener('click', function (e) {
-//     if (e.target && e.target.classList.contains('redaguoti')) {
-//         inputoModalas.classList.add('modal_overlay--active');
-//         editIndex = e.target.parentElement.parentElement.rowIndex - 1;
-//         // sudedam duomenis is masyvo i modalo inputus
-//         duomenys.value = duomenys[editIndex][0];
-//         mainModalButton.innerHTML = 'Redaguoti';
-//         redaguotiDuomenis = true;
-//         console.log('veikia');
-//     }
-// })
+
+body.addEventListener('click', function (e) {
+    if (e.target && e.target.classList.contains('redaguoti')) {
+        inputoModalas.classList.add('modal_overlay--active');
+        editIndex = e.target.parentElement.parentElement;
+        console.log(e.target.parentElement.querySelector('.ttt').innerHTML)
+
+
+        // sudedam duomenis is masyvo i modalo inputus
+        tasks.value = tasks[atributas];
+        console.log('veikia nb');
+    }
+    if (e.target && e.target.classList.contains('trinti')) {
+        e.target.parentElement.remove();
+    }
+});
+
+    // redaguotiButton.addEventListener('click', function(e){
+    //     if (e.target && e.target.classList.contains('redaguoti')) {
+    //         inputoModalas.classList.add('modal_overlay--active');
+    //         console.log(e.target.parentElement.querySelector('.ttt').innerHTML)
+    // };
+
+
+    // trintiButton.addEventListener('click', function(e){
+    //     newTask.remove();
+    // })
+    
